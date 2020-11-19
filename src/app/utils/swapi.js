@@ -20,10 +20,6 @@ export const getAllPeople = async () => {
 
     const otherJsons = await Promise.all(otherRes.map((r) => r.json()));
 
-    if (!otherRes.ok) {
-      throw new Error(firstRes.statusText);
-    }
-
     const combinedResults = otherJsons.reduce(
       (acc, curr) => acc.concat(curr.results),
       []
