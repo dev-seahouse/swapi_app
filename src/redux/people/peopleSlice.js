@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { getAllPeople } from './../../utils/swapi';
+import { getAllPeople } from '../../utils/swapi';
 
 const initialState = {
   entities: [],
@@ -9,14 +9,12 @@ const initialState = {
 };
 
 export const fetchAllPeople = createAsyncThunk(
-  'people/fetachAllPeople',
+  'people/fetchAllPeople',
   async () => {
     const res = await getAllPeople();
     return res;
   }
 );
-
-export const fetchPepole = createAsyncThunk('');
 
 const peopleSlice = createSlice({
   name: 'poeple',

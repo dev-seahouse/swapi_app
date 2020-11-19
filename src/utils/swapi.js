@@ -1,4 +1,4 @@
-import { SWAPI_URL } from '../../config';
+import {SWAPI_URL} from '../config';
 
 export const getAllPeople = async () => {
   try {
@@ -32,6 +32,5 @@ export const getAllPeople = async () => {
 
 export const getPeopleByPage = async (pageNum = 1) => {
   const resPromise = await fetch(`${SWAPI_URL}/people/?page=${pageNum}`);
-  const resJson = await resPromise.json();
-  return resJson;
+  return await resPromise.json();
 };

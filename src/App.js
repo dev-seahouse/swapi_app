@@ -6,7 +6,7 @@ import {
   Switch,
 } from 'react-router-dom';
 
-import './App.css';
+import './app.scss';
 
 function App() {
   return (
