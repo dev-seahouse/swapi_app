@@ -10,20 +10,22 @@ import './App.css';
 
 function App() {
   return (
-    <Router basename="/people">
+    <Router>
       <main>
         <Switch>
           <Route path="/" exact>
+            <Redirect to="/people" />
+          </Route>
+          <Route path="/people" exact>
             <div className="">
               <h1>People page</h1>
             </div>
           </Route>
-          <Route path="/:personId">
+          <Route path="/people/:personId">
             <div className="">
               <h1>People Details</h1>
             </div>
           </Route>
-          <Redirect to="/" />
         </Switch>
       </main>
     </Router>
