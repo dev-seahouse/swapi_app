@@ -7,6 +7,7 @@ import {
 } from 'react-router-dom';
 
 import './app.scss';
+import {People} from "./components/people/peopleList.component";
 
 function App() {
   return (
@@ -17,9 +18,7 @@ function App() {
             <Redirect to="/people" />
           </Route>
           <Route path="/people" exact>
-            <div className="">
-              <h1>People page</h1>
-            </div>
+            <People />
           </Route>
           <Route path="/people/:personId">
             <div className="">
