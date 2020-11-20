@@ -21,13 +21,13 @@ export const PeopleList = () => {
     <div className="gallery-item">
       <div className="card">
         <div className="card-header">
-          <span>{fileIdx}</span>
+          <span className="text-sm"><em>FILE #{fileIdx}</em></span>
         </div>
-        <div className="card-content">
-          <h3>{name}</h3>
-          <h4>{birthYear}</h4>
+        <div className="card-content text-center">
+          <h3 className="text-no-wrap file-text">{name}</h3>
+          <h4 className="file-subtitle file-text">{birthYear}</h4>
         </div>
-        <div className="card-footer">
+        <div className="card-footer text-center">
           <a href="">Open File</a>
         </div>
       </div>
