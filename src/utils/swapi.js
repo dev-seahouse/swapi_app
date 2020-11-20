@@ -10,20 +10,20 @@ export const getAllPeople = async () => {
     }
 
     const numPagesToFetch = Math.ceil(firstJson.count / 10);
-
     const otherPromises = [];
 
     for (let i = 2; i <= numPagesToFetch; i++) {
       otherPromises.push(fetch(`${SWAPI_URL}/people/?page=${i}`));
     }
-    const otherRes = await Promise.all(otherPromises);
 
+    const otherRes = await Promise.all(otherPromises);
     const otherJsons = await Promise.all(otherRes.map((r) => r.json()));
 
     const combinedResults = otherJsons.reduce(
       (acc, curr) => acc.concat(curr.results),
       []
     );
+
     return firstJson.results.concat(combinedResults);
   } catch (err) {
     return Promise.reject(err.message ? err.message : []);

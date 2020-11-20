@@ -2,6 +2,7 @@ import React from 'react';
 import './home.styles.scss';
 import { ReactComponent as SiteLogo } from '../assets/images/starwars_logo.svg';
 import heroImage from '../assets/images/bg.png';
+import {PeopleList} from "../components/people/peopleList.component";
 
 export const Home = () => {
   return (
@@ -27,66 +28,9 @@ export const Home = () => {
           <img src={heroImage} alt="soldier holding gun" />
         </div>
       </section>
-      <section className="section section-main">
+      <section className="section section-main section-full-height" id="char">
         <h1 className="section-title">CHARACTERS</h1>
-        <div className="gallery">
-          <div className="gallery-item">
-            <div className="card">
-              <div className="card-header">
-                <span>file 1</span>
-              </div>
-              <div className="card-content">
-                <h3>Dark Vader</h3>
-                <h4>1988Y</h4>
-              </div>
-              <div className="card-footer">
-                <a href="">Open File</a>
-              </div>
-            </div>
-          </div>
-          <div className="gallery-item">
-            <div className="card">
-              <div className="card-header">
-                <span>file 1</span>
-              </div>
-              <div className="card-content">
-                <h3>Dark Vader</h3>
-                <h4>1988Y</h4>
-              </div>
-              <div className="card-footer">
-                <a href="">Open File</a>
-              </div>
-            </div>
-          </div>
-          <div className="gallery-item">
-            <div className="card">
-              <div className="card-header">
-                <span>file 1</span>
-              </div>
-              <div className="card-content">
-                <h3>Dark Vader</h3>
-                <h4>1988Y</h4>
-              </div>
-              <div className="card-footer">
-                <a href="">Open File</a>
-              </div>
-            </div>
-          </div>
-          <div className="gallery-item">
-            <div className="card">
-              <div className="card-header">
-                <span>file 1</span>
-              </div>
-              <div className="card-content">
-                <h3>Dark Vader</h3>
-                <h4>1988Y</h4>
-              </div>
-              <div className="card-footer">
-                <a href="">Open File</a>
-              </div>
-            </div>
-          </div>
-        </div>
+        <PeopleList/>
       </section>
     </React.Fragment>
   );
