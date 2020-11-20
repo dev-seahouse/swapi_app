@@ -1,10 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.scss';
+import './assets/fonts/Jedi.ttf';
+import './assets/fonts/BrandonGrotesque-Black.woff2';
+import './assets/fonts/BrandonGrotesque-Bold.woff2';
+
 import App from './app';
 import store from './redux/store';
 import { Provider } from 'react-redux';
 import * as serviceWorker from './serviceWorker';
+
 
 ReactDOM.render(
   <React.StrictMode>
