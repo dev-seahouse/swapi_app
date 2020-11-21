@@ -80,7 +80,7 @@ body {
 
 .section {
   height: 90vh;
-  padding: 5%;
+  padding: calc(1rem + 5vh) 10%;
 }
 
 .section-full-height {
@@ -147,7 +147,9 @@ body {
 
 /*= section =*/
 .section-title {
+	font-family: "Jedi", sans-serif;
   text-decoration: underline;
+	margin-bottom: 2.5rem;
 }
 
 /*= gallery =*/
