@@ -2,9 +2,9 @@ import React from 'react';
 import './home.styles.scss';
 import { ReactComponent as SiteLogo } from '../assets/images/starwars_logo.svg';
 import heroImage from '../assets/images/bg.png';
-import {PeopleList} from "../components/people/peopleList.component";
+import { PeopleList } from '../components/people/peopleList.component';
 
-export const Home = () => {
+export const HomePage = () => {
   return (
     <React.Fragment>
       <section className="hero flex section">
@@ -30,7 +30,7 @@ export const Home = () => {
       </section>
       <section className="section section-main section-full-height" id="char">
         <h1 className="section-title">CHARACTERS</h1>
-        <PeopleList/>
+        <PeopleList />
       </section>
     </React.Fragment>
   );

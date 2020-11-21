@@ -1,5 +1,6 @@
 import './peopleList.styles.scss';
 import React, { useEffect } from 'react';
+import {useHistory, useRouteMatch} from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   fetchAllPeople,
@@ -17,8 +18,12 @@ export const PeopleList = () => {
     }
   }, [peopleStatus, dispatch]);
 
-  const PersonCard = ({ name, birthYear, fileIdx }) => (
-    <div className="gallery-item">
+  const PersonCard = ({ name, birthYear, fileIdx, id }) => {
+    let history = useHistory();
+    let match = useRouteMatch();
+    const handleClick = (id) => history.push(`${match.path}/${id}`)
+    return (
+    <div className="gallery-item" onClick=  {handleClick.bind(null, id)}>
       <div className="card">
         <div className="card-header">
           <span className="text-sm"><em>FILE #{fileIdx}</em></span>
@@ -28,11 +33,11 @@ export const PeopleList = () => {
           <h4 className="file-subtitle file-text">{birthYear}</h4>
         </div>
         <div className="card-footer text-center">
-          <a href="">Open File</a>
+          <a href="" >Open File</a>
         </div>
       </div>
     </div>
-  );
+  )};
 
   let peopleList = (<div className="flex flex-h-center full-width">
     <h1 className="text-center">Loading....</h1>
@@ -41,16 +46,17 @@ export const PeopleList = () => {
   if (peopleStatus === 'succeeded') {
     peopleList = (
       <div className="gallery">
-        {allPeople.map((person, i) => (
+        {allPeople.map((person) => (
           <PersonCard
-            fileIdx={i}
+            fileIdx={person.id}
             name={person.name}
-            key={person.url}
+            key={person.id}
+            id = {person.id}
             birthYear={person.birth_year}
           />
         ))}
       </div>
     );
   }
-  return <div className="gallery">{peopleList}</div>;
+  return (peopleList);
 };

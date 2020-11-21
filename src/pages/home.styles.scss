@@ -3,7 +3,6 @@
   flex-wrap: wrap;
   background-color: #202020;
   align-items: center;
-  padding-top: 10%;
 }
 
 .hero-content {
@@ -29,7 +28,7 @@
 
 .banner-subtitle-container {
   align-items: baseline;
-  justify-content: space-between;
+  justify-content: flex-start;
   width: 93%;
   margin: 0;
 }
@@ -37,7 +36,9 @@
 .banner-subtitle {
   font-family: 'BrandonGrotesqueBlack', sans-serif;
   color: #5e5e5e;
-  font-size: calc(1rem + 0.4vw);
+  font-size: calc(.958rem + 0.488vw);
+	margin-right: calc(2.3rem + 2.5vw);
+
 }
 
 .banner-subtitle-alt-sm {
