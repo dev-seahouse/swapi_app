@@ -8,7 +8,7 @@ import {
 
 import './app.scss';
 import { People } from './components/people/peopleList.component';
-import { Home } from './pages/home.page';
+import { HomePage } from './pages/home.page';
 
 function App() {
   return (
@@ -20,7 +20,7 @@ function App() {
               <Redirect to="/people" />
             </Route>
             <Route path="/people" exact>
-              <Home />
+              <HomePage />
             </Route>
             <Route path="/people/:personId">
               <div>
