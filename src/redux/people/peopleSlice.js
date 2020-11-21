@@ -8,12 +8,17 @@ const initialState = {
   // pages: 1, // to be used for infinite scroll
 };
 
+const addIdToObj = (obj, index) => obj.id = index + 1
+
 export const fetchAllPeople = createAsyncThunk(
   'people/fetchAllPeople',
   async () => {
-    return await getAllPeople();
+    const allPeople = await getAllPeople();
+    allPeople.map(addIdToObj)
+    return allPeople
   }
 );
+
 
 const peopleSlice = createSlice({
   name: 'people',
@@ -35,6 +40,7 @@ const peopleSlice = createSlice({
     },
   },
 });
+
 
 export const selectAllPeople = (state) => state.people.entities;
 
