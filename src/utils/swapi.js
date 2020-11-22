@@ -1,8 +1,28 @@
-import {SWAPI_URL} from '../config';
+import { SWAPI_URL } from "../config";
 
+const isArrayEmpty = (entity) => Array.isArray(entity) && !entity.length;
+const isString = (str) => typeof str === "string";
+const hasNothingToFetch = (entity) => !entity || isArrayEmpty(entity);
+
+const makeRequest = (root, path) => {
+  let url = (path && `${root}${path}/`) || `${root}`;
+  return (paramObj) => {
+    if (paramObj) {
+      let newUrl = url;
+      const queryString = Object.entries(paramObj).map(
+        ([key, val]) => `${key}=${val}`
+      );
+      newUrl += `?${queryString}`;
+      return fetch(newUrl);
+    }
+    return fetch(url);
+  };
+};
+
+const peopleReq = makeRequest(SWAPI_URL, "people");
 export const getAllPeople = async () => {
   try {
-    const firstRes = await fetch(`${SWAPI_URL}/people/`);
+    const firstRes = await peopleReq();
     const firstJson = await firstRes.json();
 
     if (!firstRes.ok) {
