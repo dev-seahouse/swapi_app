@@ -33,7 +33,7 @@ export const getAllPeople = async () => {
     const otherPromises = [];
 
     for (let i = 2; i <= numPagesToFetch; i++) {
-      otherPromises.push(fetch(`${SWAPI_URL}/people/?page=${i}`));
+      otherPromises.push(peopleReq({ page: i }));
     }
 
     const otherRes = await Promise.all(otherPromises);
@@ -48,6 +48,46 @@ export const getAllPeople = async () => {
   } catch (err) {
     return Promise.reject(err.message ? err.message : []);
   }
+};
+
+export const getPersonDetails = async (pObj) => {
+  const { homeworld, species, films, vehicles, starships } = pObj;
+
+  const responses = [homeworld, species, films, vehicles, starships].map(
+    (entry) => {
+      if (hasNothingToFetch(entry)) return null;
+      if (isString(entry)) {
+        return makeRequest(entry)();
+      }
+      if (Array.isArray(entry)) {
+        return entry.map((item) => makeRequest(item)());
+      }
+      return entry;
+    }
+  );
+
+  const processedReqs = responses.map(async (r) => {
+    if (Array.isArray(r)) {
+      const res = await Promise.all(r);
+      return await Promise.all(res.map((d) => d.json()));
+    }
+    //Promise.resolve must return the exact object passed in if and only if it is a promise
+    if (Promise.resolve(r) === r) {
+      return r.then((data) => data.json());
+    }
+    return r;
+  });
+
+  const resolved = await Promise.all(processedReqs);
+
+  return {
+    ...pObj,
+    homeworld: resolved[0],
+    species: resolved[1],
+    films: resolved[2],
+    vehicles: resolved[3],
+    starships: resolved[4],
+  };
 };
 
 export const getPeopleByPage = async (pageNum = 1) => {
