@@ -9,6 +9,7 @@ import {
 import './app.scss';
 import { People } from './components/people/peopleList.component';
 import { HomePage } from './pages/home.page';
+import {PersonPage} from "./pages/person.page";
 
 function App() {
   return (
@@ -23,9 +24,7 @@ function App() {
               <HomePage />
             </Route>
             <Route path="/people/:personId">
-              <div>
-                <h1>People Details</h1>
-              </div>
+              <PersonPage />
             </Route>
           </Switch>
         </main>
