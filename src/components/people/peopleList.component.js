@@ -21,9 +21,9 @@ export const PeopleList = () => {
   const PersonCard = ({ name, birthYear, fileIdx, id }) => {
     let history = useHistory();
     let match = useRouteMatch();
-    const handleClick = (id) => history.push(`${match.path}/${id}`)
+    const handleClick = (id) => history.push(`${match.path}/${id}/`)
     return (
-    <div className="gallery-item" onClick=  {handleClick.bind(null, id)}>
+    <div className="gallery-item has-pointer" onClick=  {handleClick.bind(null, id)}>
       <div className="card">
         <div className="card-header">
           <span className="text-sm"><em>FILE #{fileIdx}</em></span>
@@ -33,7 +33,7 @@ export const PeopleList = () => {
           <h4 className="file-subtitle file-text">{birthYear}</h4>
         </div>
         <div className="card-footer text-center">
-          <a href="" >Open File</a>
+          <p className="link">Open File</p>
         </div>
       </div>
     </div>
