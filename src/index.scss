@@ -50,6 +50,20 @@ body {
   font-family: BrandonGrotesqueBold, sans-serif;
 }
 
+.link {
+	color:#020202;
+	text-decoration: underline;
+	font-style: italic;
+	cursor: pointer;
+}
+
+.link:hover {
+	color:#5A64E8;
+}
+.link:visited, .link:visited {
+	color:#0011FE;
+}
+
 .text-sm {
 	font-size: .6rem;
 }
