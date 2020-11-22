@@ -97,6 +97,7 @@ body {
   padding: calc(1rem + 5vh) 10%;
 }
 
+
 .section-full-height {
 	// although .full-height exist, we want to
 	// make it consistent to write modifier
@@ -195,4 +196,7 @@ body {
   color: black;
 }
 
-
+/* misc */
+.has-pointer {
+	cursor: pointer;
+}
