@@ -1,33 +1,30 @@
-import React from 'react';
+import React from "react";
 import {
   BrowserRouter as Router,
   Route,
   Redirect,
   Switch,
-} from 'react-router-dom';
+} from "react-router-dom";
 
-import './app.scss';
-import {People} from "./components/people/peopleList.component";
+import "./app.scss";
+import { HomePage } from "./pages/home.page";
+import { PersonPage } from "./pages/person.page";
 
 function App() {
   return (
-    <Router>
-      <main>
-        <Switch>
-          <Route path="/" exact>
-            <Redirect to="/people" />
-          </Route>
-          <Route path="/people" exact>
-            <People />
-          </Route>
-          <Route path="/people/:personId">
-            <div className="">
-              <h1>People Details</h1>
-            </div>
-          </Route>
-        </Switch>
-      </main>
-    </Router>
+    <div className="container">
+      <Router>
+        <main>
+          <Switch>
+            <Route exact path="/">
+              <Redirect to="/people" />
+            </Route>
+            <Route exact path="/people" component={HomePage} />
+            <Route path="/people/:personId" component={PersonPage} />
+          </Switch>
+        </main>
+      </Router>
+    </div>
   );
 }
 

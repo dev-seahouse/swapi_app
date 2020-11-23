@@ -1,0 +1,97 @@
+.doc-box {
+	background-color: #FFC500;
+	min-height: 85vh;
+	padding:5%;
+	margin:0 auto;
+}
+
+.doc-box-id-container {
+	margin-bottom:3rem;
+}
+
+.doc-box-header-content {
+	margin:.5rem;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+}
+
+.doc-box-title {
+	text-align: center;
+	font-family: "BrandonGrotesqueBold", sans-serif;
+	font-size:calc(.9rem + 1vw);
+	font-style: italic;
+	color: #313131;
+	margin:auto;
+	padding:0;
+	border-top: 1px solid #707070;
+	border-bottom: 1px solid #707070;
+}
+
+.doc-box-subtitle {
+	font-family:"BrandonGrotesqueThin", sans-serif ;
+	color:#323232;
+	font-size: calc(.5rem + .5vw);
+	font-style: italic;
+	font-weight: bold;
+	text-align: center;
+	margin: .5rem auto;
+}
+
+.doc-box-main-content	{
+	display: flex;
+	justify-content: space-between;
+	flex-wrap: wrap;
+	align-items: flex-start;
+	max-width: 90%;
+	margin:2rem auto;
+	color: #323232;
+}
+
+
+.doc-box-content-title {
+	font-family: "BrandonGrotesqueBold", sans-serif;
+	text-decoration: underline;
+	color:#323232;
+}
+
+.doc-box-content-row {
+	display: flex;
+	list-style: none;
+	flex-direction: column;
+	margin:.5rem 0;
+	color:#323232;
+	font-family:"BrandonGrotesqueThin", sans-serif ;
+	font-style: italic;
+	font-weight: bold;
+	justify-content: space-between;
+	font-size: calc(.8rem + .2vw);
+}
+
+.doc-box-content-row-col {
+	display: flex;
+	flex-direction: row;
+}
+
+.doc-box-content-field-name {
+	width: 75px;
+	margin-right:5px;
+	margin-bottom:5px;
+}
+
+.doc-box-content-field-val  {
+	color: black;
+}
+
+.doc-box-id {
+	color: #313131;
+	font-size: calc(.8rem + 1vw)
+}
+
+.doc-box-secret-img {
+	width: 9rem;
+	transform: rotate(-12deg);
+}
+
+
+

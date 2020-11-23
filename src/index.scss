@@ -1,10 +1,203 @@
 @import-normalize;
+@font-face {
+  font-family: 'Jedi';
+  src: local('Jedi'), url('./assets/fonts/Jedi.ttf') format('truetype');
+  font-weight: normal;
+}
+
+@font-face {
+  font-family: 'BrandonGrotesqueBlack';
+  src: local('BrandonGrotesqueBlack'),
+    url('./assets/fonts/BrandonGrotesque-Black.woff2') format('woff2');
+  font-weight: 800;
+}
+
+@font-face {
+  font-family: 'BrandonGrotesqueBold';
+  src: local('BrandonGrotesqueBold'),
+    url('./assets/fonts/BrandonGrotesque-Bold.woff2') format('woff2');
+  font-weight: bold;
+}
+
+@font-face {
+  font-family: 'BrandonGrotesqueThin';
+  src: local('BrandonGrotesqueThin'),
+    url('./assets/fonts/BrandonGrotesque-Thin.woff2') format('woff2');
+  font-weight: 200;
+}
+
+
+/* Base Rules */
+* {
+  padding: 0;
+  margin: 0;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+html {
+  box-sizing: border-box;
+  font-size: 16px;
+}
 
 body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  background-color: #313131;
+  color: white;
+  font-family: BrandonGrotesqueBold, sans-serif;
+}
+
+.link {
+	color:#020202;
+	text-decoration: underline;
+	font-style: italic;
+	cursor: pointer;
+}
+
+.link:hover {
+	color:#5A64E8;
+}
+.link:visited, .link:visited {
+	color:#0011FE;
+}
+
+.text-sm {
+	font-size: .6rem;
+}
+
+.text-no-wrap {
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+/* Layout rules */
+.container {
+  width: 85%;
+  margin: 3.4rem auto 0;
+}
+
+.flex {
+  display: flex;
+}
+
+.flex-h-center {
+	justify-content: center;
+}
+
+.flex-v-center {
+		align-content: center;
+}
+
+.section {
+  height: 90vh;
+  padding: calc(1rem + 5vh) 10%;
+}
+
+
+.section-full-height {
+	// although .full-height exist, we want to
+	// make it consistent to write modifier
+	// rules immediately after
+	// their parent rules to make sure
+	// specificity is correct
+	height: 100%;
+}
+
+.section-main {
+  background-color: #d30728;
+}
+
+.inline-block {
+  display: inline-block;
+}
+
+.text-center {
+	text-align: center;
+}
+
+.full-width {
+	width: 100%;
+}
+
+.full-height {
+	height: 100%;
+}
+
+/* Modules */
+
+/*= Button =*/
+.btn {
+  display: inline-block;
+	border:1px solid #d30728;
+  border-radius: 2rem;
+  padding: 1rem 2rem;
+  margin: 1rem;
+  font-family: 'BrandonGrotesqueBlack', sans-serif;
+  font-size: 1rem;
+  color: black;
+  text-decoration: none;
+  background: white;
+  text-align: center;
+  white-space: nowrap;
+  cursor: pointer;
+  &:hover {
+    box-shadow: inset 0 -3px 0 rgba(0, 0, 0, 0.15);
+  }
+  &:active {
+    transform: translateY(1px);
+    box-shadow: inset 0 3px 0 0 rgba(0, 0, 0, 0.15);
+  }
+  &:focus {
+    outline: none;
+  }
+}
+
+.btn-primary {
+  background-color: #d30728;
+  color: white;
+}
+
+/*= section =*/
+.section-title {
+	font-family: "Jedi", sans-serif;
+  text-decoration: underline;
+	margin-bottom: 2.5rem;
+}
+
+/*= gallery =*/
+.gallery {
+	--gap: 1rem;
+  display: flex;
+  flex-wrap: wrap;
+	margin: calc(-1 * var(--gap)) 0 0 calc(-1 * var(--gap));
+	width: calc(100% + var(--gap));
+  justify-content: space-between;
+  align-items: center;
+}
+
+.gallery > * {
+	margin: var(--gap) 0 0 var(--gap);
+}
+
+.gallery-item {
+  flex: 1 1 150px;
+}
+
+/*=card =*/
+.card {
+  width: 100%;
+  height: 100%;
+	padding: .6rem;
+  border: 1px solid black;
+  background: #FFC500;
+  color: black;
+}
+
+/* misc */
+.has-pointer {
+	cursor: pointer;
 }

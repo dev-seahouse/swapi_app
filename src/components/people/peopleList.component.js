@@ -1,27 +1,43 @@
-import './peopleList.styles.scss'
-import React, {useEffect} from 'react';
-import {useDispatch, useSelector} from "react-redux";
-import {fetchAllPeople, selectAllPeople} from "../../redux/people/peopleSlice";
+import "./peopleList.styles.scss";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  fetchAllPeople,
+  selectAllPeople,
+} from "../../redux/people/peopleSlice";
+import { PersonCard } from "./personCard.component";
 
-export const People = () => {
+export const PeopleList = () => {
   const allPeople = useSelector(selectAllPeople);
-  const peopleStatus = useSelector(state=>state.people.status)
-  const dispatch = useDispatch()
+  const peopleStatus = useSelector((state) => state.people.status);
+  const dispatch = useDispatch();
 
-  useEffect(()=>{
-      if (peopleStatus === 'idle') {
-        dispatch(fetchAllPeople())
-      }
-  }, [peopleStatus, dispatch])
+  useEffect(() => {
+    if (peopleStatus === "idle") {
+      dispatch(fetchAllPeople());
+    }
+  }, [peopleStatus, dispatch]);
 
-  let peopleList = '<p>Loading....</p>'
+  let peopleList = (
+    <div className="flex flex-h-center full-width">
+      <h1 className="text-center">Loading....</h1>
+    </div>
+  );
+
   if (peopleStatus === "succeeded") {
-    peopleList = (<ul>
-      {allPeople.map(person=> (<li key={person.url}>{person.name}</li>))}
-    </ul>)
+    peopleList = (
+      <div className="gallery">
+        {allPeople.map((person) => (
+          <PersonCard
+            fileIdx={person.id}
+            name={person.name}
+            key={person.id}
+            id={person.id}
+            birthYear={person.birth_year}
+          />
+        ))}
+      </div>
+    );
   }
-  console.log(peopleStatus)
-  return (<div>
-    {peopleList}
-  </div>)
-}
+  return peopleList;
+};
