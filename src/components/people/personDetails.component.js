@@ -11,15 +11,17 @@ import "./person.styles.scss";
 
 import React, { useEffect, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { BackButton } from "../shared/backbutton.component";
+import { BackButton } from "../shared/backButton.component";
 
-export const Person = ({ personId }) => {
+export const PersonDetails = ({ personId, parentUrl }) => {
   const peopleStatus = useSelector((state) => state.people.status);
   const person = useSelector((state) => selectPerson(state, personId));
   const dispatch = useDispatch();
   const personDetailsStatus = useSelector((state) =>
     selectPersonDetailsStatus(state, personId)
   );
+
+  console.log(parentUrl);
 
   const fetchAllPeopleIfNotExist = useCallback(
     (peopleStatus) => {
@@ -160,7 +162,7 @@ export const Person = ({ personId }) => {
   }
   return (
     <section className="section">
-      <BackButton />
+      <BackButton parentUrl={parentUrl} btnText="Back To List" />
       {content}
     </section>
   );
