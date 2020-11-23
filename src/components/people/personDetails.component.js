@@ -7,6 +7,7 @@ import {
 
 import TopSecretStamp from "../../assets/images/topsecret.png";
 import { Profile } from "./personDetails.profile.component";
+import { ContentCol } from "./personDetails.contentCol.component";
 import "./person.styles.scss";
 
 import React, { useEffect, useCallback } from "react";
@@ -30,6 +31,10 @@ export const PersonDetails = ({ personId, parentUrl }) => {
     [dispatch]
   );
 
+  function mapObjArrToList(arr, name, emptyMsg) {
+    return arr ? arr.map((a) => <li key={a[name]}>{a[name]}</li>) : emptyMsg;
+  }
+
   // handles user directly visits /people:personId
   useEffect(() => {
     fetchAllPeopleIfNotExist(peopleStatus);
@@ -41,41 +46,7 @@ export const PersonDetails = ({ personId, parentUrl }) => {
     }
   }, [personId, peopleStatus, personDetailsStatus, dispatch]);
 
-  const starshipsContent = (starships) => (
-    <div className="doc-box-content-col">
-      <h3 className="doc-box-content-title">Starships</h3>
-      <ul className="doc-box-content-row">
-        {starships
-          ? starships.map((s) => <li key={s.name}>{s.name}</li>)
-          : "No ships"}
-      </ul>
-    </div>
-  );
-
-  const vehiclesContent = (vehicles) => (
-    <div className="doc-box-content-col">
-      <h3 className="doc-box-content-title">Vehicles</h3>
-      <ul className="doc-box-content-row">
-        {vehicles
-          ? vehicles.map((v) => <li key={v.name}>{v.name}</li>)
-          : "No Vehicles"}
-      </ul>
-    </div>
-  );
-
-  const moviesContent = (movies) => (
-    <div className="doc-box-content-col">
-      <h3 className="doc-box-content-title">Movies</h3>
-      <ul className="doc-box-content-row">
-        {movies
-          ? movies.map((m) => <li key={m.title}>{m.title}</li>)
-          : "No Movies"}
-      </ul>
-    </div>
-  );
-
   let content = <h1 className="text-center">Loading</h1>;
-
   if (peopleStatus === "succeeded" && personDetailsStatus === "succeeded") {
     content = (
       <div className="doc-box">
@@ -98,11 +69,32 @@ export const PersonDetails = ({ personId, parentUrl }) => {
         <div className="doc-box-content">
           <div className="doc-box-main-content">
             {Profile(person)}
-            {starshipsContent(person.starships)}
-            {vehiclesContent(person.vehicles)}
+            {
+              <ContentCol
+                title={"Starships"}
+                objArr={person.starships}
+                objKey={"starships"}
+                emptyMsg={"No Starships"}
+              />
+            }
+            {
+              <ContentCol
+                title={"Vehicles"}
+                objArr={person.vehicles}
+                objKey={"vehicles"}
+                emptyMsg={"No Vehicles"}
+              />
+            }
           </div>
           <div className="doc-box-main-content">
-            {moviesContent(person.films)}
+            {
+              <ContentCol
+                title={"Movies"}
+                objArr={person.movies}
+                objKey={"title"}
+                emptyMsg={"No Movies"}
+              />
+            }
           </div>
         </div>
       </div>
