@@ -6,7 +6,8 @@ import {
 } from "../../redux/people/peopleSlice";
 
 import TopSecretStamp from "../../assets/images/topsecret.png";
-
+import { Profile } from "./personDetails.profile.component";
+import { ContentCol } from "./personDetails.contentCol.component";
 import "./person.styles.scss";
 
 import React, { useEffect, useCallback } from "react";
@@ -21,8 +22,6 @@ export const PersonDetails = ({ personId, parentUrl }) => {
     selectPersonDetailsStatus(state, personId)
   );
 
-  console.log(parentUrl);
-
   const fetchAllPeopleIfNotExist = useCallback(
     (peopleStatus) => {
       if (peopleStatus === "idle") {
@@ -31,6 +30,10 @@ export const PersonDetails = ({ personId, parentUrl }) => {
     },
     [dispatch]
   );
+
+  function mapObjArrToList(arr, name, emptyMsg) {
+    return arr ? arr.map((a) => <li key={a[name]}>{a[name]}</li>) : emptyMsg;
+  }
 
   // handles user directly visits /people:personId
   useEffect(() => {
@@ -43,91 +46,7 @@ export const PersonDetails = ({ personId, parentUrl }) => {
     }
   }, [personId, peopleStatus, personDetailsStatus, dispatch]);
 
-  const profileContent = (person) => (
-    <div className="doc-box-content-col">
-      <h3 className="doc-box-content-title">Profile</h3>
-      <div className="doc-box-content-row">
-        <div className="doc-box-content-row-col">
-          <p className="doc-box-content-field-name">Name:</p>
-          <p className="doc-box-content-field-val">{person.name}</p>
-        </div>
-        <div className="doc-box-content-row-col">
-          <p className="doc-box-content-field-name text-no-wrap">Birth Year:</p>
-          <p className="doc-box-content-field-val">{person.birth_year}</p>
-        </div>
-        <div className="doc-box-content-row-col">
-          <p className="doc-box-content-field-name">Gender:</p>
-          <p className="doc-box-content-field-val">{person.gender}</p>
-        </div>
-        <div className="doc-box-content-row-col">
-          <p className="doc-box-content-field-name">Height:</p>
-          <p className="doc-box-content-field-val">{person.height}</p>
-        </div>
-        <div className="doc-box-content-row-col">
-          <p className="doc-box-content-field-name">Mass:</p>
-          <p className="doc-box-content-field-val">{person.mass}</p>
-        </div>
-        <div className="doc-box-content-row-col">
-          <p className="doc-box-content-field-name">Skin Color:</p>
-          <p className="doc-box-content-field-val">{person.skin_color}</p>
-        </div>
-        <div className="doc-box-content-row-col">
-          <p className="doc-box-content-field-name">Eye Color:</p>
-          <p className="doc-box-content-field-val">{person.eye_color}</p>
-        </div>
-        <div className="doc-box-content-row-col">
-          <p className="doc-box-content-field-name">Species:</p>
-          <p className="doc-box-content-field-val">
-            {person.species
-              ? person.species.map((s) => s.name).join(",")
-              : "unknown"}
-          </p>
-        </div>
-        <div className="doc-box-content-row-col">
-          <p className="doc-box-content-field-name">Home:</p>
-          <p className="doc-box-content-field-val">
-            {person.homeworld ? person.homeworld.name : "unknown"}
-          </p>
-        </div>
-      </div>
-    </div>
-  );
-
-  const starshipsContent = (starships) => (
-    <div className="doc-box-content-col">
-      <h3 className="doc-box-content-title">Starships</h3>
-      <ul className="doc-box-content-row">
-        {starships
-          ? starships.map((s) => <li key={s.name}>{s.name}</li>)
-          : "No ships"}
-      </ul>
-    </div>
-  );
-
-  const vehiclesContent = (vehicles) => (
-    <div className="doc-box-content-col">
-      <h3 className="doc-box-content-title">Vehicles</h3>
-      <ul className="doc-box-content-row">
-        {vehicles
-          ? vehicles.map((v) => <li key={v.name}>{v.name}</li>)
-          : "No Vehicles"}
-      </ul>
-    </div>
-  );
-
-  const moviesContent = (movies) => (
-    <div className="doc-box-content-col">
-      <h3 className="doc-box-content-title">Movies</h3>
-      <ul className="doc-box-content-row">
-        {movies
-          ? movies.map((m) => <li key={m.title}>{m.title}</li>)
-          : "No Movies"}
-      </ul>
-    </div>
-  );
-
   let content = <h1 className="text-center">Loading</h1>;
-
   if (peopleStatus === "succeeded" && personDetailsStatus === "succeeded") {
     content = (
       <div className="doc-box">
@@ -149,12 +68,33 @@ export const PersonDetails = ({ personId, parentUrl }) => {
         </div>
         <div className="doc-box-content">
           <div className="doc-box-main-content">
-            {profileContent(person)}
-            {starshipsContent(person.starships)}
-            {vehiclesContent(person.vehicles)}
+            {Profile(person)}
+            {
+              <ContentCol
+                title={"Starships"}
+                objArr={person.starships}
+                objKey="name"
+                emptyMsg={"No Starships"}
+              />
+            }
+            {
+              <ContentCol
+                title="Vehicles"
+                objArr={person.vehicles}
+                objKey="name"
+                emptyMsg="No Vehicles"
+              />
+            }
           </div>
           <div className="doc-box-main-content">
-            {moviesContent(person.films)}
+            {
+              <ContentCol
+                title={"Movies"}
+                objArr={person.movies}
+                objKey={"title"}
+                emptyMsg={"No Movies"}
+              />
+            }
           </div>
         </div>
       </div>
@@ -162,7 +102,11 @@ export const PersonDetails = ({ personId, parentUrl }) => {
   }
   return (
     <section className="section">
-      <BackButton parentUrl={parentUrl} btnText="Back To List" />
+      <BackButton
+        parentUrl={parentUrl}
+        btnText="Back To List"
+        classNames="no-h-margin"
+      />
       {content}
     </section>
   );

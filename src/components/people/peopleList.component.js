@@ -39,5 +39,15 @@ export const PeopleList = () => {
       </div>
     );
   }
+
+  if (peopleStatus === "failed") {
+    peopleList = (
+      <div className="flex flex-h-center full-width">
+        <h1 className="text-center">
+          Something unexpected happened, please try later and refresh the page
+        </h1>
+      </div>
+    );
+  }
   return peopleList;
 };

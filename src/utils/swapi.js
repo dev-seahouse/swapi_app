@@ -53,41 +53,45 @@ export const getAllPeople = async () => {
 export const getPersonDetails = async (pObj) => {
   const { homeworld, species, films, vehicles, starships } = pObj;
 
-  const responses = [homeworld, species, films, vehicles, starships].map(
-    (entry) => {
-      if (hasNothingToFetch(entry)) return null;
-      if (isString(entry)) {
-        return makeRequest(entry)();
+  try {
+    const responses = [homeworld, species, films, vehicles, starships].map(
+      (entry) => {
+        if (hasNothingToFetch(entry)) return null;
+        if (isString(entry)) {
+          return makeRequest(entry)();
+        }
+        if (Array.isArray(entry)) {
+          return entry.map((item) => makeRequest(item)());
+        }
+        return entry;
       }
-      if (Array.isArray(entry)) {
-        return entry.map((item) => makeRequest(item)());
+    );
+
+    const processedReqs = responses.map(async (r) => {
+      if (Array.isArray(r)) {
+        const res = await Promise.all(r);
+        return await Promise.all(res.map((d) => d.json()));
       }
-      return entry;
-    }
-  );
+      //Promise.resolve must return the exact object passed in if and only if it is a promise
+      if (Promise.resolve(r) === r) {
+        return r.then((data) => data.json());
+      }
+      return r;
+    });
 
-  const processedReqs = responses.map(async (r) => {
-    if (Array.isArray(r)) {
-      const res = await Promise.all(r);
-      return await Promise.all(res.map((d) => d.json()));
-    }
-    //Promise.resolve must return the exact object passed in if and only if it is a promise
-    if (Promise.resolve(r) === r) {
-      return r.then((data) => data.json());
-    }
-    return r;
-  });
+    const resolved = await Promise.all(processedReqs);
 
-  const resolved = await Promise.all(processedReqs);
-
-  return {
-    ...pObj,
-    homeworld: resolved[0],
-    species: resolved[1],
-    films: resolved[2],
-    vehicles: resolved[3],
-    starships: resolved[4],
-  };
+    return {
+      ...pObj,
+      homeworld: resolved[0],
+      species: resolved[1],
+      films: resolved[2],
+      vehicles: resolved[3],
+      starships: resolved[4],
+    };
+  } catch (e) {
+    return Promise.reject(e.message ? e.message : {});
+  }
 };
 
 export const getPeopleByPage = async (pageNum = 1) => {
