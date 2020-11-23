@@ -3,6 +3,7 @@ import { SWAPI_URL } from "../config";
 const isArrayEmpty = (entity) => Array.isArray(entity) && !entity.length;
 const isString = (str) => typeof str === "string";
 const hasNothingToFetch = (entity) => !entity || isArrayEmpty(entity);
+const convertToHttps = (link) => link.replace(/^http:/, "https:");
 
 const makeRequest = (root, path) => {
   let url = (path && `${root}${path}/`) || `${root}`;
@@ -13,9 +14,9 @@ const makeRequest = (root, path) => {
         ([key, val]) => `${key}=${val}`
       );
       newUrl += `?${queryString}`;
-      return fetch(newUrl);
+      return fetch(convertToHttps(newUrl));
     }
-    return fetch(url);
+    return fetch(convertToHttps(url));
   };
 };
 
