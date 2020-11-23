@@ -73,16 +73,16 @@ export const PersonDetails = ({ personId, parentUrl }) => {
               <ContentCol
                 title={"Starships"}
                 objArr={person.starships}
-                objKey={"starships"}
+                objKey="name"
                 emptyMsg={"No Starships"}
               />
             }
             {
               <ContentCol
-                title={"Vehicles"}
+                title="Vehicles"
                 objArr={person.vehicles}
-                objKey={"vehicles"}
-                emptyMsg={"No Vehicles"}
+                objKey="name"
+                emptyMsg="No Vehicles"
               />
             }
           </div>
