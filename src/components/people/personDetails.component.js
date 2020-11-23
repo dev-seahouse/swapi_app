@@ -160,7 +160,11 @@ export const PersonDetails = ({ personId, parentUrl }) => {
   }
   return (
     <section className="section">
-      <BackButton parentUrl={parentUrl} btnText="Back To List" />
+      <BackButton
+        parentUrl={parentUrl}
+        btnText="Back To List"
+        classNames="no-h-margin"
+      />
       {content}
     </section>
   );
