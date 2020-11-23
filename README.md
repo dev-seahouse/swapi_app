@@ -1,3 +1,3 @@
 # A simple react-redux spa for swapi.dev
 
-[Demo Link](psychedelic-cent.surge.sh)
+[Demo Link](https://psychedelic-cent.surge.sh)
