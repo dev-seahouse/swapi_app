@@ -1,11 +1,14 @@
 import React from "react";
-import { useParams } from "react-router-dom";
+import { Redirect, useParams } from "react-router-dom";
 import { PersonDetails } from "../components/people/personDetails.component";
 
 export const PersonPage = (props) => {
   let { personId } = useParams();
 
-  // const hasInvalidParam = (param)=> isNaN(personId) ||
-  // if ()
-  return <PersonDetails personId={personId} parentUrl={"/people"} />;
+  const hasInvalidParam = (param) => !personId || isNaN(personId);
+  return hasInvalidParam(personId) ? (
+    <Redirect to="/" />
+  ) : (
+    <PersonDetails personId={personId} parentUrl={"/people"} />
+  );
 };

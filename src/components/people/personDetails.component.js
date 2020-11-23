@@ -21,8 +21,6 @@ export const PersonDetails = ({ personId, parentUrl }) => {
     selectPersonDetailsStatus(state, personId)
   );
 
-  console.log(parentUrl);
-
   const fetchAllPeopleIfNotExist = useCallback(
     (peopleStatus) => {
       if (peopleStatus === "idle") {
