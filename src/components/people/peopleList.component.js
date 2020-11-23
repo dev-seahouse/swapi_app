@@ -1,11 +1,11 @@
-import './peopleList.styles.scss';
-import React, { useEffect } from 'react';
-import {useHistory, useRouteMatch} from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
+import "./peopleList.styles.scss";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import {
   fetchAllPeople,
   selectAllPeople,
-} from '../../redux/people/peopleSlice';
+} from "../../redux/people/peopleSlice";
+import { PersonCard } from "./personCard.component";
 
 export const PeopleList = () => {
   const allPeople = useSelector(selectAllPeople);
@@ -13,37 +13,18 @@ export const PeopleList = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (peopleStatus === 'idle') {
+    if (peopleStatus === "idle") {
       dispatch(fetchAllPeople());
     }
   }, [peopleStatus, dispatch]);
 
-  const PersonCard = ({ name, birthYear, fileIdx, id }) => {
-    let history = useHistory();
-    let match = useRouteMatch();
-    const handleClick = (id) => history.push(`${match.path}/${id}/`)
-    return (
-    <div className="gallery-item has-pointer" onClick=  {handleClick.bind(null, id)}>
-      <div className="card">
-        <div className="card-header">
-          <span className="text-sm"><em>FILE #{fileIdx}</em></span>
-        </div>
-        <div className="card-content text-center">
-          <h3 className="text-no-wrap file-text">{name}</h3>
-          <h4 className="file-subtitle file-text">{birthYear}</h4>
-        </div>
-        <div className="card-footer text-center">
-          <p className="link">Open File</p>
-        </div>
-      </div>
+  let peopleList = (
+    <div className="flex flex-h-center full-width">
+      <h1 className="text-center">Loading....</h1>
     </div>
-  )};
+  );
 
-  let peopleList = (<div className="flex flex-h-center full-width">
-    <h1 className="text-center">Loading....</h1>
-  </div>);
-
-  if (peopleStatus === 'succeeded') {
+  if (peopleStatus === "succeeded") {
     peopleList = (
       <div className="gallery">
         {allPeople.map((person) => (
@@ -51,12 +32,12 @@ export const PeopleList = () => {
             fileIdx={person.id}
             name={person.name}
             key={person.id}
-            id = {person.id}
+            id={person.id}
             birthYear={person.birth_year}
           />
         ))}
       </div>
     );
   }
-  return (peopleList);
+  return peopleList;
 };
